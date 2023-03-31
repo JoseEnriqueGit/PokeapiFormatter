@@ -1,1 +1,1 @@
-export { default as useAllPokemon } from "./useFilterPokemons";
+export { default as useFilterPokemons } from './useFilterPokemons';
