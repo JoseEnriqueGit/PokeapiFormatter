@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // Custom Hooks
-import useAllPokemon from "./Hooks/Custom/useAllPokemons";
+import useFilterPokemons from "./Hooks/Custom/useFilterPokemons";
 
 import "./Styles/index.css";
 // Components
@@ -13,7 +13,7 @@ const App = (): JSX.Element => {
   const [toSearch, setToSearch] = useState<string>("");
   const [selectedType, setSelectedType] = useState<string>("All");
   const [counter, setCounter] = useState<number>(0);
-  const { filteredPokemons } = useAllPokemon(toSearch, selectedType);
+  const { filteredPokemons } = useFilterPokemons(toSearch, selectedType);
 
   useEffect(() => {
     setCounter(filteredPokemons.length);
