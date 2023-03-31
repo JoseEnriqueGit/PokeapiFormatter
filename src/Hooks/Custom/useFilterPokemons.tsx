@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import Fuse from "fuse.js";
 
 // https://pokeapi.co/api/v2/pokemon/?offset=20&limit=1281
 
 interface Pokemon {
-  url: any;
+  url: string;
   name: string;
   types: string[];
 }
@@ -29,12 +29,12 @@ const useFilterPokemons = (toSearch: string, selectedType: string) => {
 
   useEffect(() => {
     const fetchPokemons = async () => {
-      const response = await axios.get(
+      const response: AxiosResponse = await axios.get(
         "https://pokeapi.co/api/v2/pokemon?limit=50"
       );
       const results = response.data.results;
       const pokemonDetails = await Promise.all(
-        results.map(async (result: any) => {
+        results.map(async (result: { url: string }) => {
           const details = await axios.get(result.url);
           return {
             name: details.data.name,
@@ -53,7 +53,7 @@ const useFilterPokemons = (toSearch: string, selectedType: string) => {
   useEffect(() => {
     const fuse = new Fuse(allPokemons, options);
     const filteredByName = toSearch
-      ? fuse.search(toSearch).map((result: { item: any }) => result.item)
+      ? fuse.search(toSearch).map((result) => result.item)
       : allPokemons;
     const filteredByType =
       selectedType !== "All"
