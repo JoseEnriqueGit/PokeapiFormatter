@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 .App{
-  @apply flex flex-col min-h-screen w-full bg-slate-100 text-slate-100;
+  @apply flex flex-col min-h-screen w-full bg-slate-200;
   
+}
+
+.Formatter{
+  @apply text-amber-400 font-extrabold text-2xl;
+  -webkit-text-stroke: 1.5px #004A8E;
+}
+
+.PokeName{
+  @apply text-amber-200 font-extrabold text-2xl capitalize;
+  -webkit-text-stroke: 1px #004A8E;
 }
