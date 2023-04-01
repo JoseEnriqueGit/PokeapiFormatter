@@ -1,4 +1,7 @@
-export { default as Header } from "./Header";
-export { default as Search } from "./SeachSection/components/Search";
-export { default as ListBox } from "./SeachSection/components/Select/ListBox";
-export { default as PokemonCard } from "./SeachSection/components/PokemonCard";
+export { default as Header } from './Header';
+export { default as SearchIcon } from './Icons/SearchIcon';
+export { default as PokemonCard } from './PokemonCard';
+export { default as Carrusel } from './Carrousel';
+export * from './SeachSection/components/Select';
+export * from './SeachSection/components';
+export * from './SeachSection';
