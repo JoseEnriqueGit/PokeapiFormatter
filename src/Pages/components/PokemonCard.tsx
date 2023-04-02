@@ -36,17 +36,17 @@ const PokemonCard = (props: PokemonCardType) => {
             />
             <div className="w-full">
               <div className="my-2">
-                <span className="font-bold">Habilidades:</span>{" "}
+                <span className="font-bold">Habilidades: </span>
                 {pokemonData.abilities
                   ?.map((ability: any) => ability.ability.name)
                   .join(", ")}
               </div>
               <div className="my-2">
-                <span className="font-bold">Altura:</span>{" "}
+                <span className="font-bold">Altura: </span>
                 {pokemonData.height / 10}m
               </div>
               <div className="my-2">
-                <span className="font-bold">Peso:</span>{" "}
+                <span className="font-bold">Peso: </span>
                 {pokemonData.weight / 10}
                 KG
               </div>
