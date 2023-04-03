@@ -1,42 +1,51 @@
+import { useMemo } from 'react';
+// Hooks
 import { useFilterPokemons } from "../../../Hooks";
-
-// Component
+// Components
 import { ListBox, PokemonMiniCard } from "./components";
-
-interface SelectedType {
+// Interfaces
+import { PokemonData } from "../../../Types";
+interface SearchSectionProps {
   toSearch: string;
   selectedType: string;
   setSelectedType: (newValue: string) => void;
   setSelectedPokemon: (newValue: string) => void;
 }
 
-const SeachSection = (props: SelectedType) => {
-  const { filteredPokemons } = useFilterPokemons(
-    props.toSearch,
-    props.selectedType
+const PokemonList = ({ filteredPokemons, setSelectedPokemon }: { filteredPokemons: PokemonData[], setSelectedPokemon: (newValue: string) => void }) => {
+  const memoizedPokemonMiniCards = useMemo(() => (
+    filteredPokemons.map((pokemon) => (
+      <PokemonMiniCard
+        key={pokemon.name}
+        sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.match(/\/(\d+)\//)?.[1]}.png`}
+        name={pokemon.name}
+        setSelectedPokemon={setSelectedPokemon}
+      />
+    ))
+  ), [filteredPokemons, setSelectedPokemon]);
+
+  return (
+    <div className="flex flex-col gap-4 overflow-auto h-Cust1">
+      {memoizedPokemonMiniCards}
+    </div>
   );
+};
+
+const SearchSection = ({ toSearch, selectedType, setSelectedType, setSelectedPokemon }: SearchSectionProps) => {
+  const { filteredPokemons } = useFilterPokemons(toSearch, selectedType);
 
   return (
     <>
+      {/* Pokémon type list */}
       <ListBox
-        selectedType={props.selectedType}
-        setSelectedType={props.setSelectedType}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
       />
-
-      <div className="flex flex-col gap-4 overflow-auto h-Cust1">
-        {filteredPokemons.map((pokemon) => (
-          <PokemonMiniCard
-            key={pokemon.url}
-            sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-              pokemon.url.split("/")[6]
-            }.png`}
-            name={pokemon.name}
-            setSelectedPokemon={props.setSelectedPokemon}
-          />
-        ))}
-      </div>
+      {/* Pokémon  filtered list*/}
+      <PokemonList filteredPokemons={filteredPokemons} setSelectedPokemon={setSelectedPokemon} />
     </>
   );
 };
 
-export default SeachSection;
+export default SearchSection;
+

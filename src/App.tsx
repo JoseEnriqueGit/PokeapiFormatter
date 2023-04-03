@@ -1,23 +1,23 @@
-// Import
 import { useState, useEffect } from "react";
-
-// Custom Hooks
-import useFilterPokemons from "./Hooks/Custom/useFilterPokemons";
-
 import "./Styles/index.css";
+// Hooks
+import useFilterPokemons from "./Hooks/Custom/useFilterPokemons";
 // Components
-import { Header, Search } from "./Pages/components";
-import { SeachSection } from "./Pages/components/SeachSection";
+import { Header, Search, SeachSection, PokemonCard, PokemonCarousel } from "./Pages/components";
 
 const App = (): JSX.Element => {
-  const [toSearch, setToSearch] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<string>("All");
-  const [counter, setCounter] = useState<number>(0);
+  const [toSearch, setToSearch] = useState("");
+  const [selectedType, setSelectedType] = useState("All");
+  const [counter, setCounter] = useState(0);
+  const [selectedPokemon, setSelectedPokemon] = useState("");
+
   const { filteredPokemons } = useFilterPokemons(toSearch, selectedType);
 
   useEffect(() => {
-    setCounter(filteredPokemons.length);
-  });
+    if (filteredPokemons) {
+      setCounter(filteredPokemons.length);
+    }
+  }, [filteredPokemons]);
 
   return (
     <div className="App">
@@ -29,12 +29,16 @@ const App = (): JSX.Element => {
             toSearch={toSearch}
             selectedType={selectedType}
             setSelectedType={setSelectedType}
+            setSelectedPokemon={setSelectedPokemon}
           />
         </article>
 
-        <article className="w-full h-20">
-          <h1>Selected Pokemon</h1>
-        </article>
+        {selectedPokemon && (
+          <article className="w-full h-20">
+            <PokemonCard selectedPokemon={selectedPokemon} />
+            <PokemonCarousel selectedPokemon={selectedPokemon} />
+          </article>
+        )}
       </main>
     </div>
   );
