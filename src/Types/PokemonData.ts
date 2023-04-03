@@ -1,4 +1,4 @@
-interface PokemonData {
+type PokemonData = {
   url: string;
   name: string;
   types: string[];
