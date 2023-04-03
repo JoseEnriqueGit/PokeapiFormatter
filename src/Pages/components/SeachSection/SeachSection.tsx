@@ -5,7 +5,8 @@ import { useFilterPokemons } from "../../../Hooks";
 import { ListBox, PokemonMiniCard } from "./components";
 // Interfaces
 import { PokemonData } from "../../../Types";
-interface SearchSectionProps {
+
+type SearchSectionProps = {
   toSearch: string;
   selectedType: string;
   setSelectedType: (newValue: string) => void;

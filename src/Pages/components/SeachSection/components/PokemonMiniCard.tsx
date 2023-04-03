@@ -1,27 +1,32 @@
-interface PokemonMiniCard {
+interface IPokemonMiniCard {
   sprite: string;
   name: string;
   setSelectedPokemon: (newValue: string) => void;
 }
 
-const PokemonMiniCard = (props: PokemonMiniCard) => {
-  const handlePokemonClick = (pokemonName: string): void => {
-    props.setSelectedPokemon(pokemonName);
+const PokemonMiniCard = ({
+  sprite,
+  name,
+  setSelectedPokemon,
+}: IPokemonMiniCard): JSX.Element => {
+  const handlePokemonClick = (): void => {
+    setSelectedPokemon(name);
   };
 
   return (
     <div
-      onClick={() => handlePokemonClick(props.name)}
-      className="bg-white flex self-center items-center flex-col w-full rounded-md p-2"
+      onClick={handlePokemonClick}
+      className="bg-white flex self-center items-center flex-col w-full rounded-md p-2 hover:bg-gray-100"
     >
       <img
         className="h-20"
-        src={props.sprite}
-        alt={`Sprite de ${props.name}`}
+        src={sprite}
+        alt={`Sprite de ${name}`}
       />
-      <span className="PokeName">{props.name}</span>
+      <span className="PokeName">{name}</span>
     </div>
   );
 };
 
 export default PokemonMiniCard;
+

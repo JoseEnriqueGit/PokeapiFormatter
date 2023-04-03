@@ -5,7 +5,7 @@ interface PokemonCardType {
   selectedPokemon: string;
 }
 
-const PokemonCarousel = (props: PokemonCardType) => {
+const PokemonCarousel = (props: PokemonCardType): JSX.Element => {
   const [sprites, setSprites] = useState<string[]>([]);
   const [currentSpriteIndex, setCurrentSpriteIndex] = useState(0);
 
