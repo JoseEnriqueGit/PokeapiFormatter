@@ -3,26 +3,44 @@ import axios from "axios";
 // components
 import unknown from "../../assets/unknow.png";
 
-interface PokemonCardType {
+interface PokemonCardProps {
   selectedPokemon: string;
 }
 
-const PokemonCard = (props: PokemonCardType) => {
-  const [pokemonData, setPokemonData] = useState<any>({});
+interface PokemonData {
+  name: string;
+  sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
+  };
+  abilities: { ability: { name: string } }[];
+  height: number;
+  weight: number;
+}
+
+const PokemonCard = ({ selectedPokemon }: PokemonCardProps): JSX.Element => {
+  const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon/" + props.selectedPokemon
-      );
-      setPokemonData(response.data);
+      try {
+        const response = await axios.get<PokemonData>(
+          `https://pokeapi.co/api/v2/pokemon/${selectedPokemon}`
+        );
+        setPokemonData(response.data);
+      } catch (error) {
+        setPokemonData(null);
+      }
     };
     fetchData();
-  }, [props.selectedPokemon]);
+  }, [selectedPokemon]);
 
   return (
     <div className="flex justify-center items-center">
-      {pokemonData.name ? (
+      {pokemonData ? (
         <div className="w-96 rounded-md shadow-lg overflow-hidden">
           <div className="bg-red-500 text-white p-4 text-center text-lg font-bold capitalize">
             {pokemonData.name}
@@ -38,7 +56,7 @@ const PokemonCard = (props: PokemonCardType) => {
               <div className="my-2">
                 <span className="font-bold">Habilidades: </span>
                 {pokemonData.abilities
-                  ?.map((ability: any) => ability.ability.name)
+                  ?.map((ability) => ability.ability.name)
                   .join(", ")}
               </div>
               <div className="my-2">
@@ -55,7 +73,7 @@ const PokemonCard = (props: PokemonCardType) => {
         </div>
       ) : (
         <div className="flex justify-center items-center w-96 h-96 rounded-md overflow-hidden">
-          <img src={unknown} alt={pokemonData.name} className="" />
+          <img src={unknown} alt="unknown" className="" />
         </div>
       )}
     </div>
