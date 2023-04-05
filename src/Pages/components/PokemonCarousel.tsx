@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+// components
+import { Spinner } from "./Icons";
 
 interface PokemonCardType {
   selectedPokemon: string;
@@ -46,10 +48,10 @@ const PokemonCarousel = (props: PokemonCardType): JSX.Element => {
         </div>
       )}
       <button
-        className="w-96 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="w-96 flex justify-center bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded"
         onClick={handleNextClick}
       >
-        Next
+        <Spinner fill="#FFF" height={24} />
       </button>
     </div>
   );
