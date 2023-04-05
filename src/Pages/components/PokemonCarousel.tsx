@@ -51,7 +51,7 @@ const PokemonCarousel = (props: PokemonCardType): JSX.Element => {
         className="w-96 flex justify-center bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded"
         onClick={handleNextClick}
       >
-        <Spinner fill="#FFF" height={24} />
+        <Spinner stroke="#FFF" height={24} />
       </button>
     </div>
   );

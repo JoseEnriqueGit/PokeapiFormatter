@@ -7,9 +7,9 @@ const SearchIcon = (props: SVGProps<SVGSVGElement>) => (
     width={props.width}
     height={props.height}
     stroke={props.stroke}
+    strokeWidth={props.strokeWidth || 3}
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={3}
     strokeLinecap="round"
     strokeLinejoin="round"
     {...props}
