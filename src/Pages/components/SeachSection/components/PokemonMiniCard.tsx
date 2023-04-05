@@ -29,4 +29,3 @@ const PokemonMiniCard = ({
 };
 
 export default PokemonMiniCard;
-

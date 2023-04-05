@@ -12,7 +12,7 @@ const Search = (props: SearchProps) => {
   return (
     <label htmlFor="Search" className="flex col-span-full flex-row">
       <div className="flex justify-center items-center bg-gray-50 rounded-l-xl px-6">
-        <SearchIcon />
+        <SearchIcon stroke="#2c3e50" height={24} />
       </div>
       <input
         id="Search"
