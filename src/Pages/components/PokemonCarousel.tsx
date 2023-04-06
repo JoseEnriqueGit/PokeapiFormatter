@@ -24,7 +24,7 @@ const PokemonCarousel = (props: PokemonCardType): JSX.Element => {
       });
   }, [props.selectedPokemon]);
 
-  const handleNextClick = () => {
+  const handleRotateClick = () => {
     if (currentSpriteIndex === sprites.length - 1) {
       setCurrentSpriteIndex(0);
     } else {
@@ -49,7 +49,7 @@ const PokemonCarousel = (props: PokemonCardType): JSX.Element => {
       )}
       <button
         className="w-96 flex justify-center bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded"
-        onClick={handleNextClick}
+        onClick={handleRotateClick}
       >
         <Spinner stroke="#FFF" height={24} />
       </button>
