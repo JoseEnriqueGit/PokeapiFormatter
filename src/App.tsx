@@ -3,7 +3,13 @@ import "./Styles/index.css";
 // Hooks
 import useFilterPokemons from "./Hooks/Custom/useFilterPokemons";
 // Components
-import { Header, Search, SeachSection, PokemonCard, PokemonCarousel } from "./Pages/components";
+import {
+  Header,
+  Search,
+  SeachSection,
+  PokemonCard,
+  PokemonCarousel,
+} from "./Pages/components";
 
 const App = (): JSX.Element => {
   const [toSearch, setToSearch] = useState("");
@@ -33,12 +39,16 @@ const App = (): JSX.Element => {
           />
         </article>
 
-        {selectedPokemon && (
-          <article className="w-full h-20">
-            <PokemonCard selectedPokemon={selectedPokemon} />
-            <PokemonCarousel selectedPokemon={selectedPokemon} />
-          </article>
-        )}
+        <article className="w-full h-20">
+          {selectedPokemon !== "" ? (
+            <>
+              <PokemonCard selectedPokemon={selectedPokemon} />
+              <PokemonCarousel selectedPokemon={selectedPokemon} />
+            </>
+          ) : (
+            <></>
+          )}
+        </article>
       </main>
     </div>
   );

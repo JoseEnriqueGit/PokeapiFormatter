@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 // components
-import unknown from "../../assets/unknow.png";
+import PokemonCardLoader from "./Loader/PokemonCardLoader";
 
 interface PokemonCardProps {
   selectedPokemon: string;
@@ -23,8 +23,10 @@ interface PokemonData {
 
 const PokemonCard = ({ selectedPokemon }: PokemonCardProps): JSX.Element => {
   const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const response = await axios.get<PokemonData>(
@@ -34,13 +36,14 @@ const PokemonCard = ({ selectedPokemon }: PokemonCardProps): JSX.Element => {
       } catch (error) {
         setPokemonData(null);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, [selectedPokemon]);
 
   return (
     <div className="flex justify-center items-center">
-      {pokemonData ? (
+      {pokemonData && !isLoading ? (
         <div className="w-96 rounded-md shadow-lg overflow-hidden">
           <div className="bg-red-500 text-white p-4 text-center text-lg font-bold capitalize">
             {pokemonData.name}
@@ -72,9 +75,7 @@ const PokemonCard = ({ selectedPokemon }: PokemonCardProps): JSX.Element => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center items-center w-96 h-96 rounded-md overflow-hidden">
-          <img src={unknown} alt="unknown" className="" />
-        </div>
+        <PokemonCardLoader />
       )}
     </div>
   );
