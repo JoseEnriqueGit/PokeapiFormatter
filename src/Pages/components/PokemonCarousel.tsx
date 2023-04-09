@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 // components
 import { Spinner } from "./Icons";
-import PokemonCarouselLoader from "./Loader/PokemonCarouselLoader";
+import { PokemonCarouselLoader } from "./Loader";
 
 interface PokemonCardType {
   selectedPokemon: string;
