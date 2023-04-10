@@ -30,7 +30,7 @@ const useFilterPokemons = (toSearch: string, selectedType: string) => {
   useEffect(() => {
     const fetchPokemons = async () => {
       const response: AxiosResponse = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon?limit=50"
+        "https://pokeapi.co/api/v2/pokemon?limit=100"
       );
       const results = response.data.results;
       const pokemonDetails = await Promise.all(
