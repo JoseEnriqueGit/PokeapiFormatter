@@ -7,7 +7,7 @@ interface PokemonCardProps {
   selectedPokemon: string;
 }
 
-interface PokemonData {
+interface PokemonDataApi {
   name: string;
   sprites: {
     other: {
@@ -22,14 +22,14 @@ interface PokemonData {
 }
 
 const PokemonCard = ({ selectedPokemon }: PokemonCardProps): JSX.Element => {
-  const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
+  const [pokemonData, setPokemonData] = useState<PokemonDataApi | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const response = await axios.get<PokemonData>(
+        const response = await axios.get<PokemonDataApi>(
           `https://pokeapi.co/api/v2/pokemon/${selectedPokemon}`
         );
         setPokemonData(response.data);

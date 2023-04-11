@@ -4,7 +4,7 @@ import { useFilterPokemons } from "../../../Hooks";
 // Components
 import { ListBox, PokemonMiniCard } from "./components";
 // Interfaces
-import { PokemonData } from "../../../Types";
+import { PokemonData } from "./Types";
 
 type SearchSectionProps = {
   toSearch: string;

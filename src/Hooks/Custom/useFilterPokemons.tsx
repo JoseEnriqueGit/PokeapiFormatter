@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import Fuse from "fuse.js";
-
 // https://pokeapi.co/api/v2/pokemon/?offset=20&limit=1281
-
 interface Pokemon {
   url: string;
   name: string;
